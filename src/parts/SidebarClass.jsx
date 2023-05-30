@@ -8,7 +8,7 @@ function SidebarClass({ data, defaultUri }) {
 
   const match = useLocation();
 
-  console.log(match);
+  // console.log(data);
 
   const [toggleMenu, setToggleMenu] = React.useState(false);
 

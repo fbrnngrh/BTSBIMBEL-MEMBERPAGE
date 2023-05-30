@@ -21,18 +21,17 @@ export default function DetailsClass() {
 
   const match = useParams();
 
-  console.log(match);
-
   const COURSES = useSelector((state) => state.courses);
+
+  // console.log(COURSES);
 
   useEffect(() => {
     window.scroll(0, 0);
-
     dispatch(statusCourses("loading"));
     courses
       .details(match.class)
       .then((res) => {
-        console.log(res);
+        console.log(res?.chapters);
         if (res.chapters.length === 0)
           throw new Error("Class might be not ready yet");
         else dispatch(watchCourse(res));
@@ -48,6 +47,7 @@ export default function DetailsClass() {
 
   let currentChapter;
   let currentLesson;
+  let currentQuiz;
   if (COURSES.status === "ok" && COURSES?.data?.[match.class]?.chapters) {
     currentChapter =
       COURSES?.data?.[match.class]?.chapters?.find(
@@ -57,11 +57,55 @@ export default function DetailsClass() {
     currentLesson =
       currentChapter?.lessons?.find((lesson) => lesson.video === match.uid) ??
       currentChapter?.lessons?.[0];
+
+    currentQuiz =
+      currentChapter?.quizzes?.find((quiz) => quiz.id === match.uid) ??
+      currentChapter?.quizzes?.[0];
+  }
+
+  // console.log(currentChapter);
+  // console.log(currentLesson);
+  // console.log(currentQuiz);
+
+  function nextVideo() {
+    const currentLessonIndex = currentChapter.lessons.findIndex(
+      (lesson) => lesson.video === currentLesson.video
+    );
+    const nextLesson = currentChapter.lessons[currentLessonIndex + 1];
+    if (nextLesson) {
+      window.location.href = `/courses/${match.class}/${currentChapter.id}/${nextLesson.video}`;
+    } else {
+      const nextChapter = COURSES.data[match.class].chapters.find(
+        (chapter) => chapter.id === currentChapter.id + 1
+      );
+      if (nextChapter) {
+        window.location.href = `/courses/${match.class}/${nextChapter.id}/${nextChapter.lessons[0].video}`;
+      } else {
+        window.location.href = `/courses/${match.class}/${currentChapter.id}/${currentLesson.video}`;
+      }
+    }
+  }
+
+  function prevVideo(){
+    const currentLessonIndex = currentChapter.lessons.findIndex(
+      (lesson) => lesson.video === currentLesson.video
+    );
+    const prevLesson = currentChapter.lessons[currentLessonIndex - 1];
+    if (prevLesson) {
+      window.location.href = `/courses/${match.class}/${currentChapter.id}/${prevLesson.video}`;
+    } else {
+      const prevChapter = COURSES.data[match.class].chapters.find(
+        (chapter) => chapter.id === currentChapter.id - 1
+      );
+      if (prevChapter) {
+        window.location.href = `/courses/${match.class}/${prevChapter.id}/${prevChapter.lessons[prevChapter.lessons.length - 1].video}`;
+      } else {
+        window.location.href = `/courses/${match.class}/${currentChapter.id}/${currentLesson.video}`;
+      }
+    }
   }
 
 
-
-  function nextVideo() {}
   return (
     <div className="flex">
       {COURSES.data?.[match.class]?.chapters?.length > 0 && (
@@ -81,6 +125,32 @@ export default function DetailsClass() {
                 </p>
               </section>
               <section className="flex flex-col mt-8">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <button
+                      onClick={nextVideo}
+                      className="flex items-center px-4 py-2 space-x-2 text-sm font-medium text-white rounded-lg bg-secondary"
+                    >
+                      <span>Next Lesson</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-5 h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M14 5l7 7m0 0l-7 7m7-7H3"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </section>
+              <section className="flex flex-col mt-8">
                 <div className="flex items-center justify-start -mx-4">
                   <div className="w-full px-4">
                     <div className="relative">
@@ -97,7 +167,6 @@ export default function DetailsClass() {
                                 rel: 0,
                               },
                             }}
-                            onEnd={nextVideo}
                           ></Youtube>
                         )}
                       </div>

@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 
 import { useDispatch } from "react-redux";
 
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Select from "../components/Form/Select";
@@ -67,7 +67,16 @@ function SettingForm({ details }) {
     users
       .update(payload)
       .then((res) => {
-        toast.success("Profile updated");
+        toast.success('Profile Updated', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         setState({
           ...state,
           password: "",
@@ -186,11 +195,12 @@ function SettingForm({ details }) {
 
               <button
                 type="submit"
-                className="px-6 py-3 mt-4 text-white transition-all duration-200 bg-secondary shadow-inner hover:bg-red-400 focus:outline-none"
+                className="px-6 py-3 mt-4 text-white transition-all duration-200 shadow-inner bg-secondary hover:bg-red-400 focus:outline-none"
               >
                 Simpan
               </button>
             </form>
+            <ToastContainer />
           </div>
         </div>
       </section>

@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 
 import users from "../constants/api/users";
 
-function Sidebar() {
+function SidebarAdmin() {
   const navigate = useNavigate();
 
  const match = useLocation();
@@ -82,52 +82,51 @@ function Sidebar() {
           </div>
 
           <ul className="mt-12 main-menu">
-            <li>
-              <Link
-                className={[
-                  "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:bg-secondary active:text-white focus:outline-none w-full text-left",
-                  getNavLinkClass("/"),
-                ].join(" ")}
-                to="/"
-              >
-                My Class
-              </Link>
-            </li>
-            <li>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                className={[
-                  "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left text-indigo-500",
-                ].join(" ")}
-                href={`${process.env.REACT_APP_FRONTPAGE_URL}/courses`}
-              >
-                Library
-              </a>
-            </li>
-            <li>
-              <Link
-                className={[
-                  "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left",
-                  getNavLinkClass("/transactions"),
-                ].join(" ")}
-                to="/transactions"
-              >
-                Transactions
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={[
-                  "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left",
-                  getNavLinkClass("/settings"),
-                ].join(" ")}
-                to="/settings"
-              >
-                Settings
-              </Link>
-            </li>
-          </ul>
+          <li>
+            <Link
+              className={[
+                "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:bg-secondary active:text-white focus:outline-none w-full text-left",
+                getNavLinkClass("/"),
+              ].join(" ")}
+              to="/"
+            >
+              Dashboard
+            </Link>
+          </li>
+          <li>
+          <Link
+              className={[
+                "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left",
+                getNavLinkClass("/courses"),
+              ].join(" ")}
+              to="/courses"
+            >
+             All Courses
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={[
+                "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left",
+                getNavLinkClass("/transactions"),
+              ].join(" ")}
+              to="/AllTransactions "
+            >
+             All Transactions
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={[
+                "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left",
+                getNavLinkClass("/settings"),
+              ].join(" ")}
+              to="/"
+            >
+              Settings
+            </Link>
+          </li>
+        </ul>
 
           <div className="my-auto"></div>
 
@@ -149,4 +148,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default SidebarAdmin;

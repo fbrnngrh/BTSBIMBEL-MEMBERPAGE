@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { createBrowserHistory } from "history";
 import { Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "../src/assets/css/style.css";
 
@@ -19,8 +19,10 @@ import Joined from "./pages/Joined";
 import DetailsClass from "./pages/DetailsClass";
 import Settings from "./pages/Settings";
 import Transactions from "./pages/Transactions";
+import DashboardAdmin from "pages/DashboardAdmin";
 
 import  setAuthorizationHeader  from "./configs/axios/setAuthorizationHeader";
+
 
 import users from "./constants/api/users";
 
@@ -30,17 +32,32 @@ function App() {
   const dispatch = useDispatch();
   const history = createBrowserHistory({ basename: process.env.PUBLIC_URL });
 
+  const [role, setRole] = React.useState(null);
+
+  const USERS = useSelector((state) => state.users);
+
   useEffect(() => {
     let session = null;
     if (localStorage.getItem("BTSBIMBEL:token")) {
       session = JSON.parse(localStorage.getItem("BTSBIMBEL:token"));
       setAuthorizationHeader(session.token);
-
       users.details().then((details) => {
         dispatch(populateProfile(details.data));
       });
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    if (USERS?.role === "admin") {
+      setRole("admin");
+    } else if (USERS?.role === "student") {
+      setRole("student");
+    } else {
+      setRole(null);
+    }
+  }, [USERS]);
+  
+  
   return (
     <>
       <Routes history={history}>
@@ -74,7 +91,7 @@ function App() {
           path="/"
           element={
             <MemberRoute>
-              <MyClass />
+              {role === "admin" ? ( <DashboardAdmin />) : (<MyClass />)}
             </MemberRoute>
           }
         />

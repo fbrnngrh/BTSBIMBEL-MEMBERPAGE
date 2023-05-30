@@ -21,8 +21,6 @@ export default function Transactions() {
 
   const location = useLocation();
 
-  console.log(location);
-
   const params =
     location?.search.length > 0 &&
     location?.search

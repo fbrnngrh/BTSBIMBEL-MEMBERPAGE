@@ -651,6 +651,9 @@ video {
 .h-24{
   height: 6rem;
 }
+.h-5{
+  height: 1.25rem;
+}
 .h-full{
   height: 100%;
 }
@@ -677,6 +680,9 @@ video {
 }
 .w-3\/12{
   width: 25%;
+}
+.w-5{
+  width: 1.25rem;
 }
 .w-5\/12{
   width: 41.666667%;
@@ -739,6 +745,11 @@ video {
 .justify-between{
   justify-content: space-between;
 }
+.space-x-2 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
 .overflow-hidden{
   overflow: hidden;
 }
@@ -752,6 +763,9 @@ video {
 }
 .rounded-full{
   border-radius: 9999px;
+}
+.rounded-lg{
+  border-radius: 0.5rem;
 }
 .border{
   border-width: 1px;

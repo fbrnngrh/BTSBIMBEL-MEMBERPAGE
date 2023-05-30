@@ -1,6 +1,6 @@
 import React, { useState, useEffect,useCallback } from "react";
 
-import { Link, useNavigate, useMatch, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import courses from "../constants/api/courses";
 
@@ -11,7 +11,7 @@ export default function Joined() {
 
   const match = useParams();
 
-  console.log(match); 
+  console.log(match);
   
   const navigate = useNavigate();
   const [state, setstate] = useState(() => ({
@@ -25,17 +25,18 @@ export default function Joined() {
       const res = await courses.details(match.class);
       const joined = await courses.join(match.class);
 
+      console.log(joined);
+
       if (joined.data.snap_url) window.location.href = joined.data.snap_url;
       else setstate({ isLoading: false, isError: false, data: res});
     }catch(error){
       if (error?.response?.data?.message === "user already take this course")
-        navigate(`/courses/${match?.class}`);
+        navigate(`/courses/${match.class}`);
     }
   }, [match.class, navigate]);
 
   useEffect(() => {
     window.scroll(0, 0);
-
     joining();
   }, [joining]);
 
@@ -43,7 +44,6 @@ export default function Joined() {
   if (state.isError) return <ServerError></ServerError>;
 
   
-
   return (
     <section className="flex flex-col items-center h-screen mt-24">
       <img
@@ -58,7 +58,6 @@ export default function Joined() {
       <Link
         className="px-6 py-3 mt-5 text-white transition-all duration-200 bg-orange-500 shadow-inner cursor-pointer hover:bg-orange-400 focus:outline-none"
         to={`/courses/${match.class}`}
-        // to={`/courses/${match.class}`}
       >
         Start learn
       </Link>

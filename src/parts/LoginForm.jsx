@@ -29,6 +29,7 @@ function LoginForm() {
         setAuthorizationHeader(res.data.token);
         users.details().then((detail) => {
           dispatch(populateProfile(detail.data));
+
           const production =
             process.env.REACT_APP_FRONTPAGE_URL ===
             "https://bts-bimbel.vercel.app"
