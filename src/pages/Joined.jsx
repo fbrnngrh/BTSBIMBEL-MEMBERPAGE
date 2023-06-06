@@ -1,6 +1,6 @@
 import React, { useState, useEffect,useCallback } from "react";
 
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useMatch } from "react-router-dom";
 
 import courses from "../constants/api/courses";
 
@@ -9,7 +9,7 @@ import Loading from "../parts/Loading";
 
 export default function Joined() {
 
-  const match = useParams();
+  const match = useMatch("/joined/:class");
 
   console.log(match);
   
@@ -22,8 +22,8 @@ export default function Joined() {
 
   const joining = useCallback(async () => {
     try {
-      const res = await courses.details(match.class);
-      const joined = await courses.join(match.class);
+      const res = await courses.details(match.params.class);
+      const joined = await courses.join(match.params.class);
 
       console.log(joined);
 
@@ -33,7 +33,7 @@ export default function Joined() {
       if (error?.response?.data?.message === "user already take this course")
         navigate(`/courses/${match.class}`);
     }
-  }, [match.class, navigate]);
+  }, [match.params.class, navigate]);
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -57,7 +57,7 @@ export default function Joined() {
       </p>
       <Link
         className="px-6 py-3 mt-5 text-white transition-all duration-200 bg-orange-500 shadow-inner cursor-pointer hover:bg-orange-400 focus:outline-none"
-        to={`/courses/${match.class}`}
+        to={`/courses/${match.params.class}`}
       >
         Start learn
       </Link>

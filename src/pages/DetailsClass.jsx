@@ -14,16 +14,19 @@ import courses from "../constants/api/courses";
 
 import Loading from "../parts/Loading";
 import Centered from "../parts/Centered";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 export default function DetailsClass() {
   const dispatch = useDispatch();
 
-  const match = useParams();
+  const match = useParams(
+    "/courses/:class/:chapter/:uid"
+  );
+
+  console.log(match);
 
   const COURSES = useSelector((state) => state.courses);
 
-  // console.log(COURSES);
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -31,13 +34,13 @@ export default function DetailsClass() {
     courses
       .details(match.class)
       .then((res) => {
-        console.log(res?.chapters);
+        console.log(res);
         if (res.chapters.length === 0)
           throw new Error("Class might be not ready yet");
         else dispatch(watchCourse(res));
       })
       .catch((err) => {
-        dispatch(messageCourse(err?.response?.data?.message ?? "error"));
+        dispatch(messageCourse(err?.response?.data?.message ?? "Class might be not ready yet"));
       });
   }, [match.class, dispatch]);
 
@@ -85,27 +88,6 @@ export default function DetailsClass() {
       }
     }
   }
-
-  function prevVideo(){
-    const currentLessonIndex = currentChapter.lessons.findIndex(
-      (lesson) => lesson.video === currentLesson.video
-    );
-    const prevLesson = currentChapter.lessons[currentLessonIndex - 1];
-    if (prevLesson) {
-      window.location.href = `/courses/${match.class}/${currentChapter.id}/${prevLesson.video}`;
-    } else {
-      const prevChapter = COURSES.data[match.class].chapters.find(
-        (chapter) => chapter.id === currentChapter.id - 1
-      );
-      if (prevChapter) {
-        window.location.href = `/courses/${match.class}/${prevChapter.id}/${prevChapter.lessons[prevChapter.lessons.length - 1].video}`;
-      } else {
-        window.location.href = `/courses/${match.class}/${currentChapter.id}/${currentLesson.video}`;
-      }
-    }
-  }
-
-
   return (
     <div className="flex">
       {COURSES.data?.[match.class]?.chapters?.length > 0 && (

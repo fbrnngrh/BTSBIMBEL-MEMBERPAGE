@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 
 import users from "../constants/api/users";
 
+import { toast, ToastContainer } from "react-toastify";
+
 import { setAuthorizationHeader } from "../configs/axios";
 
 import { populateProfile } from "../store/actions/users";
@@ -62,6 +64,11 @@ function LoginForm() {
       })
       .catch((err) => {
         console.log(err.response.data.message);
+        toast.error(
+          {
+            message: err.response.data.message,
+          }
+        );
       });
   }
 
@@ -97,7 +104,7 @@ function LoginForm() {
               onChange={setState}
               className="w-1/2 w-full px-6 py-3 bg-white border border-gray-600 focus:outline-none focus:border-secondary"
               value={password}
-              placeholder="Your password addres"
+              placeholder="Your password"
             />
           </div>
 
@@ -107,6 +114,7 @@ function LoginForm() {
           >
             Masuk
           </button>
+          <ToastContainer />
         </form>
       </div>
 

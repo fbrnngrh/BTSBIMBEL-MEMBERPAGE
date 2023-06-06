@@ -34,7 +34,6 @@ export default function Transactions() {
 
   useEffect(() => {
     window.scroll(0, 0);
-
     dispatch(statusOrders("loading"));
     orders
       .all()

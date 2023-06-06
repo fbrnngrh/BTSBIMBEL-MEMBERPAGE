@@ -8,7 +8,6 @@ function SidebarClass({ data, defaultUri }) {
 
   const match = useLocation();
 
-  // console.log(data);
 
   const [toggleMenu, setToggleMenu] = React.useState(false);
 
@@ -19,7 +18,7 @@ function SidebarClass({ data, defaultUri }) {
   };
 
   const sidebarStyle = {
-    width: 280,
+    width: window.innerWidth < 640 ? 280 : 280,
     left: window.innerWidth < 640 && !toggleMenu ? "-280px" : 0,
   };
 

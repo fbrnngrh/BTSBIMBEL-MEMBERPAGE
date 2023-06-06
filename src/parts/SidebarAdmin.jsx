@@ -4,8 +4,6 @@ import { ReactComponent as DefaultUser } from "../assets/images/default-avatar.s
 
 import { Link,  useNavigate, useLocation} from "react-router-dom";
 
-import Cookies from "js-cookie";
-
 import { useSelector } from "react-redux";
 
 import users from "../constants/api/users";
@@ -28,7 +26,7 @@ function SidebarAdmin() {
   function logout() {
     users.logout().then(() => {
       localStorage.removeItem("BTSBIMBEL:token");
-      Cookies.remove("BTSBIMBEL");
+      document.cookie = "BTSBIMBEL:user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       navigate("/login");
     });
   }
@@ -97,31 +95,42 @@ function SidebarAdmin() {
           <Link
               className={[
                 "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left",
-                getNavLinkClass("/courses"),
+                getNavLinkClass("/managed-courses"),
               ].join(" ")}
-              to="/courses"
+              to="/managed-courses"
             >
-             All Courses
+             Managed Couses
+            </Link>
+          </li>
+          <li>
+          <Link
+              className={[
+                "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left",
+                getNavLinkClass("/managed-users"),
+              ].join(" ")}
+              to="/managed-users"
+            >
+             Managed User
             </Link>
           </li>
           <li>
             <Link
               className={[
                 "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left",
-                getNavLinkClass("/transactions"),
+                getNavLinkClass("/managed-transactions"),
               ].join(" ")}
-              to="/AllTransactions "
+              to="/managed-transactions "
             >
-             All Transactions
+             Managed Transactions
             </Link>
           </li>
           <li>
             <Link
               className={[
                 "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left",
-                getNavLinkClass("/settings"),
+                getNavLinkClass("/settings-admin"),
               ].join(" ")}
-              to="/"
+              to="/settings-admin"
             >
               Settings
             </Link>

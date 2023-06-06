@@ -91,7 +91,7 @@ function SettingForm({ details }) {
       })
       .catch((error) => setErrors(error?.response?.data?.message ?? "errors"));
   }
-
+  
   const ERRORS = fieldErrors(errors);
 
   return (

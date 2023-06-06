@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import "../src/assets/css/style.css";
+import "react-toastify/dist/ReactToastify.css"
 
 import MemberRoute from "./components/Routes/MemberRoute";
 import GuestRoute from "./components/Routes/GuestRoute";
@@ -20,6 +21,12 @@ import DetailsClass from "./pages/DetailsClass";
 import Settings from "./pages/Settings";
 import Transactions from "./pages/Transactions";
 import DashboardAdmin from "pages/DashboardAdmin";
+import ManagedCourse from "pages/ManagedCourse";
+import ManagedUser from "pages/ManagedUser";
+import ManagedTransaction from "pages/ManagedTransaction";
+import SettingAdmin from "pages/SettingAdmin";
+import AddUser from "parts/Users/AddUser";
+import { ToastContainer } from "react-toastify";
 
 import  setAuthorizationHeader  from "./configs/axios/setAuthorizationHeader";
 
@@ -27,6 +34,7 @@ import  setAuthorizationHeader  from "./configs/axios/setAuthorizationHeader";
 import users from "./constants/api/users";
 
 import { populateProfile } from "./store/actions/users";
+import AddCourse from "parts/Course/AddCourse";
 
 function App() {
   const dispatch = useDispatch();
@@ -133,6 +141,15 @@ function App() {
         />
         <Route
         index
+          path="/settings-admin"
+          element={
+            <MemberRoute>
+              <SettingAdmin />
+            </MemberRoute>
+          }
+        />
+        <Route
+        index
           path="/transactions"
           element={
             <MemberRoute>
@@ -141,9 +158,55 @@ function App() {
           }
         />
 
+        <Route
+        index
+          path="/managed-courses"
+          element={
+            <MemberRoute>
+              <ManagedCourse />
+            </MemberRoute>
+          }
+        />
+        <Route
+        index
+          path="/managed-users"
+          element={
+            <MemberRoute>
+              <ManagedUser />
+            </MemberRoute>
+          }
+        />
+        <Route
+        index
+          path="/managed-transactions"
+          element={
+            <MemberRoute>
+              <ManagedTransaction />
+            </MemberRoute>
+          }
+        />
+        <Route
+        index
+          path="/add-user"
+          element={
+            <MemberRoute>
+              <AddUser />
+            </MemberRoute>
+          }
+        />
+        <Route
+        index
+          path="/add-course"
+          element={
+            <MemberRoute>
+              <AddCourse />
+            </MemberRoute>
+          }
+        />
        
         <Route path="*" element={NotFound} />
       </Routes>
+      <ToastContainer />
     </>
   );
 }

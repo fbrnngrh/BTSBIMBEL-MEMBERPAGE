@@ -1,5 +1,4 @@
 import React from "react";
-import Sidebar from "parts/Sidebar";
 import SidebarAdmin from "parts/SidebarAdmin";
 
 function EmptyState() {

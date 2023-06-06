@@ -2,18 +2,18 @@ import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import Sidebar from "../parts/Sidebar";
-import ListClassItem from "../parts/ListClassItem";
+import Sidebar from "parts/Sidebar";
+import ListClassItem from "parts/ListClassItem";
 
-import courses from "../constants/api/courses";
+import courses from "constants/api/courses";
 
-import Loading from "../parts/Loading";
+import Loading from "parts/Loading";
 
 import {
   statusCourses,
   fetchCourses,
   messageCourse,
-} from "../store/actions/courses";
+} from "store/actions/courses";
 
 function EmptyState() {
   return (

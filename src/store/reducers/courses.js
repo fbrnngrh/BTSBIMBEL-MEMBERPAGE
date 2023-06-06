@@ -3,10 +3,17 @@ import {
   WATCH_COURSE,
   STATUS_COURSES,
   MESSAGE_COURSE,
-} from "../../constants/types/courses";
+  ADD_COURSE, 
+  UPDATE_COURSE,
+  DELETE_COURSE,
+  GET_ALL_COURSES,
+  MAKE_REQUEST,
+  FAIL_REQUEST,
+} from "constants/types/courses";
 
 const initialState = {
   data: {},
+  courseList: [],
   total: 0,
   status: "idle",
   message: "",
@@ -25,7 +32,7 @@ export default function (state = initialState, action) {
         ...state,
         data:
           action.payload?.reduce?.((acc, item) => {
-            acc[item.course_id] = item;
+            acc[item.id] = item;
             return acc;
           }, {}) ?? {},
         total: action.payload?.length ?? 0,
@@ -51,6 +58,38 @@ export default function (state = initialState, action) {
         message: action.payload,
         status: "error",
       };
+
+      
+    case ADD_COURSE:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case UPDATE_COURSE:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case DELETE_COURSE:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case GET_ALL_COURSES:
+      return {
+        ...state,
+        loading: false,
+        courseList: action.payload,
+      };
+
+    case MAKE_REQUEST:
+      return { ...state, loading: true };
+
+    case FAIL_REQUEST:
+      return { ...state, loading: false, error: action.payload };
 
     default:
       return state;

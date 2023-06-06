@@ -2,7 +2,7 @@ import {
   FETCH_ORDERS,
   STATUS_ORDERS,
   MESSAGE_ORDER,
-} from "../../constants/types/orders";
+} from "constants/types/orders";
 
 const initialState = {
   data: {},
@@ -10,8 +10,6 @@ const initialState = {
   status: "idle",
   message: "",
 };
-
-
 
 export default function (state = initialState, action) {
   switch (action.type) {

@@ -4,7 +4,6 @@ import { ReactComponent as DefaultUser } from "../assets/images/default-avatar.s
 
 import { Link,  useNavigate, useLocation} from "react-router-dom";
 
-import Cookies from "js-cookie";
 
 import { useSelector } from "react-redux";
 
@@ -28,7 +27,8 @@ function Sidebar() {
   function logout() {
     users.logout().then(() => {
       localStorage.removeItem("BTSBIMBEL:token");
-      Cookies.remove("BTSBIMBEL");
+      // remove cookie
+      document.cookie = "BTSBIMBEL:user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       navigate("/login");
     });
   }
