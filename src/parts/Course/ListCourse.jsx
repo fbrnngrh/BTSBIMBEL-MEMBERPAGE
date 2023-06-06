@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
 const ListCourse = (props) => {
   useEffect(() => {
     props.fetchCourses();
-    console.log(props.courses);
+    // console.log(props.courses);
   }, [props.courses.data]);
 
   const handleSearch = (e) => {
