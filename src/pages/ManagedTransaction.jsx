@@ -1,5 +1,6 @@
 import React from 'react'
 import SidebarAdmin from 'parts/SidebarAdmin'
+import ListTransaction from 'parts/Transaction/ListTransaction'
 
 export default function ManagedTransaction() {
   return (
@@ -14,6 +15,9 @@ export default function ManagedTransaction() {
             <p className="text-sm text-gray-600 sm:text-lg">
               Kelola semua data transaksi
             </p>
+          </section>
+          <section className="flex flex-col mt-8">
+            <ListTransaction></ListTransaction>
           </section>
         </div>
       </main>

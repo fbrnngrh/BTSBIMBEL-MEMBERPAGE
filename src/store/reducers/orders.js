@@ -2,6 +2,9 @@ import {
   FETCH_ORDERS,
   STATUS_ORDERS,
   MESSAGE_ORDER,
+ MAKE_REQUEST,
+  FAIL_REQUEST,
+  GET_ORDER_LIST,
 } from "constants/types/orders";
 
 const initialState = {
@@ -37,6 +40,27 @@ export default function (state = initialState, action) {
         message: action.payload,
         status: "error",
       };
+
+    case MAKE_REQUEST:
+      return {
+        ...state,
+        status: "loading",
+      };
+
+    case FAIL_REQUEST:
+      return {
+        ...state,
+        status: "error",
+        message: action.payload,
+      };
+
+    case GET_ORDER_LIST:
+      return {
+        ...state,
+        status: "ok",
+        data: action.payload,
+      };
+      
 
     default:
       return state;

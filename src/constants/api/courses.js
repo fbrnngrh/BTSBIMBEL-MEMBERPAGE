@@ -8,4 +8,5 @@ export default {
   create: (data) => axios.post("/courses", data),
   update: (id, data) => axios.put(`/courses/${id}`, data),
   delete: (id) => axios.delete(`/courses/${id}`),
+
 };

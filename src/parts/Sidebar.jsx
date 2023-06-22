@@ -90,7 +90,7 @@ function Sidebar() {
                 ].join(" ")}
                 to="/"
               >
-                My Class
+                Kelas Saya
               </Link>
             </li>
             <li>
@@ -102,7 +102,7 @@ function Sidebar() {
                 ].join(" ")}
                 href={`${process.env.REACT_APP_FRONTPAGE_URL}/courses`}
               >
-                Library
+                Cari Kelas
               </a>
             </li>
             <li>
@@ -113,7 +113,7 @@ function Sidebar() {
                 ].join(" ")}
                 to="/transactions"
               >
-                Transactions
+                Transaksi
               </Link>
             </li>
             <li>
@@ -124,7 +124,18 @@ function Sidebar() {
                 ].join(" ")}
                 to="/settings"
               >
-                Settings
+                Pengaturan
+              </Link>
+            </li>
+            <li>
+              <Link
+                className={[
+                  "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left",
+                  getNavLinkClass("/submission"),
+                ].join(" ")}
+                to="/submission"
+              >
+                Tugas
               </Link>
             </li>
           </ul>

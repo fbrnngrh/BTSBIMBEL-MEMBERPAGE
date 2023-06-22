@@ -1,3 +1,6 @@
 export const STATUS_ORDERS = "STATUS_ORDERS";
 export const FETCH_ORDERS = "FETCH_ORDERS";
 export const MESSAGE_ORDER = "MESSAGE_ORDER";
+export const MAKE_REQUEST = "MAKE_REQUEST";
+export const FAIL_REQUEST = "FAIL_REQUEST";
+export const GET_ORDER_LIST = "GET_ORDER_LIST";

@@ -35,6 +35,7 @@ import users from "./constants/api/users";
 
 import { populateProfile } from "./store/actions/users";
 import AddCourse from "parts/Course/AddCourse";
+import Submission from "pages/Submission";
 
 function App() {
   const dispatch = useDispatch();
@@ -200,6 +201,15 @@ function App() {
           element={
             <MemberRoute>
               <AddCourse />
+            </MemberRoute>
+          }
+        />
+        <Route
+        index
+          path="/submission"
+          element={
+            <MemberRoute>
+              <Submission />
             </MemberRoute>
           }
         />

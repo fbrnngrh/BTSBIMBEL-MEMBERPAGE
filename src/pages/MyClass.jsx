@@ -72,10 +72,10 @@ export default function MyClass() {
               <>
                 <section className="flex flex-col pl-12 mt-8 sm:pl-0">
                   <h1 className="text-xl font-medium text-gray-900 sm:text-4xl">
-                    My Class
+                    Kelas Saya
                   </h1>
                   <p className="text-sm text-gray-600 sm:text-lg">
-                    Continue learning to pursue your dreams
+                    Semua kelas yang kamu ikuti
                   </p>
                 </section>
                 <section className="flex flex-col mt-8">

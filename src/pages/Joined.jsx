@@ -9,7 +9,7 @@ import Loading from "../parts/Loading";
 
 export default function Joined() {
 
-  const match = useMatch("/joined/:class");
+ const match = useParams();
 
   console.log(match);
   
@@ -22,8 +22,8 @@ export default function Joined() {
 
   const joining = useCallback(async () => {
     try {
-      const res = await courses.details(match.params.class);
-      const joined = await courses.join(match.params.class);
+      const res = await courses.details(match.class);
+      const joined = await courses.join(match.class);
 
       console.log(joined);
 
@@ -33,7 +33,7 @@ export default function Joined() {
       if (error?.response?.data?.message === "user already take this course")
         navigate(`/courses/${match.class}`);
     }
-  }, [match.params.class, navigate]);
+  }, [match.class, navigate]);
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -52,12 +52,12 @@ export default function Joined() {
       />
       <h1 className="mt-12 text-3xl text-gray-900">Welcome to Class</h1>
       <p className="mx-auto mt-4 text-lg text-center text-gray-600 mtb-8 lg:w-4/12 xl:w-3/12">
-        You have successfully joined our{" "}
+        Kamu berhasil Join {" "}
         <strong>{state?.data?.name ?? "Class Name"}</strong> class
       </p>
       <Link
         className="px-6 py-3 mt-5 text-white transition-all duration-200 bg-orange-500 shadow-inner cursor-pointer hover:bg-orange-400 focus:outline-none"
-        to={`/courses/${match.params.class}`}
+        to={`/courses/${match.class}`}
       >
         Start learn
       </Link>
